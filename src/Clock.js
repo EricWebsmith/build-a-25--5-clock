@@ -8,7 +8,8 @@ export default function Clock() {
         sessionLength: 25,
         clockFace: '25:00',
         isSesson: true,
-        paused: false
+        paused: false,
+        playing: false
     });
     // const [audio] = useState(new Audio('beep.mp3'));
 
@@ -41,13 +42,18 @@ export default function Clock() {
     }
 
     function play() {
-        state.paused = false;
+        if (state.playing) {
+            return;
+        }
+        state.playing= true;
+        
         let totalTime = parseInt(state.sessionLength) * 60;
         if (state.paused) {
-            console.log(state.countDown);
+            state.paused = false;
             totalTime = parseInt(state.countDown);
             tick(totalTime, state.isSesson);
         } else {
+            
             tick(totalTime, true);
         }
         
@@ -58,7 +64,8 @@ export default function Clock() {
         clearTimeout(state.timeoutId+1);
         setState({
             ...state,
-            paused: true
+            paused: true,
+            playing: false
         });
     }
 
@@ -66,9 +73,12 @@ export default function Clock() {
         console.log('pausing ', state.timeoutId);
         clearTimeout(state.timeoutId+1);
         setState({
-            ...state,
+            breakLength: 5,
+            sessionLength: 25,
+            clockFace: '25:00',
+            isSesson: true,
             paused: false,
-            clockFace: '25:00'
+            playing: false
         });
     }
 
@@ -94,7 +104,7 @@ export default function Clock() {
             }
             setClock(countDown, isSesson, timeoutId);
             tick(countDown, isSesson);
-        }, 100);
+        }, 1000);
     }
 
     function format(n) {
