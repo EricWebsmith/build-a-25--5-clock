@@ -4,8 +4,8 @@ import { useState } from "react";
 
 export default function Clock() {
     const [state, setState] = useState({
-        breakLength: 1,
-        sessionLength: 1,
+        breakLength: 5,
+        sessionLength: 25,
         clockFace: '25:00',
         isSesson: true,
         paused: false
