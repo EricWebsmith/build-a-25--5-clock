@@ -18,6 +18,11 @@
       "sizes": "512x512"
     }
   ],
+  "sounds": [
+    {
+      "src":"beep.mp3"
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
